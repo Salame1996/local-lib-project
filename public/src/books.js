@@ -9,8 +9,13 @@ let result = books.find((book) => book.id === id)
 return result;
 }
 
+//Helper Function 
+function borrowed(books){
+return books.filter((book) => book.borrows.some(borrow => !borrow.returned));
+}
+
 function partitionBooksByBorrowedStatus(books) {
-  const borrowedBooks = books.filter((book) => book.borrows.some(borrow => !borrow.returned));
+  const borrowedBooks = borrowed(books)
   const returnedBooks = books.filter((book) => book.borrows.every(borrow => borrow.returned));
   return [borrowedBooks, returnedBooks];;
 }
